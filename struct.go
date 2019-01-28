@@ -15,8 +15,8 @@ type sensorData struct {
 }
 
 func main() {
-	var result []sensorData
-	var data sensorData
+	var result []sensorData // struct can be a list
+	var data sensorData     // struct can also be a single value, really intresting
 	data.ID = 111
 	data.Name = "majorin"
 	result = append(result, data) // so we don't need to define every variable value
