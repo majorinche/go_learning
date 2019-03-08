@@ -11,4 +11,5 @@ func main() {
 	*test = "majorin"
 	log.Infof("Starting ipmi_exporter mc_20190128: %s", test)
 	log.Infof("Starting ipmi_exporter mc_20190128: %s", *test)
+	log.Infof("Starting ipmi_exporter mc_20190128: %s , %s", *test, test)
 }
