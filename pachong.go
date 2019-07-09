@@ -1,5 +1,11 @@
 package main
 
+/***
+	20190709, bugfix, finish dedup
+
+
+***/
+
 import (
 	"fmt"
 	"io"
@@ -8,18 +14,20 @@ import (
 	"os"
 	"regexp"
 	"strconv"
-	//	"strings"
+	"strings"
 )
 
-func checkRegexp(cont string, reg string, style int) (result interface{}) {
-	check := regexp.MustCompile(reg)
+func checkRegexp(file string, url string, style int) (result interface{}) {
+	index_num := strings.Index(url, "=") + 1
+	url_link := url[index_num:]
+	check_url := regexp.MustCompile(url_link)
 	switch style {
 	case 0:
-		result = check.FindString(cont)
+		result = check_url.FindString(file)
 	case 1:
-		result = check.FindAllString(cont, -1)
+		result = check_url.FindAllString(file, -1)
 	default:
-		result = check.FindAll([]byte(cont), -1)
+		result = check_url.FindAll([]byte(file), -1)
 	}
 	return
 }
@@ -33,26 +41,15 @@ func fistStart() {
 
 	reg := regexp.MustCompile(`((ht|f)tps?)://[w]{0,3}.baidu.com/link\?[a-zA-z=0-9-\s]*`)
 
-	f, _ := os.OpenFile("/data/url.txt", os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
-	defer f.Close()
+	os.Truncate("/data/url.txt", 0)
+	url_file, _ := os.OpenFile("/data/url.txt", os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
+	defer url_file.Close()
 
 	for _, url := range reg.FindAllString(string(body), -1) {
-
 		url_file, _ := os.OpenFile("/data/url.txt", os.O_RDWR, 0666)
 		file, _ := ioutil.ReadAll(url_file)
-		/***
-				dd := strings.Split(url, "")
-				fmt.Print(dd)
-				dddd := ""
-				for _, ddd := range dd {
-					if ddd == "?" {
-						ddd = `\?`
-					}
-					dddd += ddd
-				}
-		***/
 		if checkRegexp(string(file), url, 0).(string) == "" {
-			io.WriteString(f, url+"\n")
+			io.WriteString(url_file, url+"\n")
 			fmt.Print("\n收集地址：" + url + "\n")
 			num++
 		}
