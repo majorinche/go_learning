@@ -10,5 +10,7 @@ func main() {
 	if err != nil {
 		fmt.Errorf("error")
 	}
-	fmt.Println(addrs)
+	for _, addr := range addrs { // 这里必须有一个下划线，否则结果是index，而不是实际值
+		fmt.Println(addr)
+	}
 }

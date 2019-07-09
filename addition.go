@@ -5,7 +5,7 @@ import (
 )
 
 func addition(x int, y int) int {
-	return x + y
+	return x + y + y
 }
 
 func main() {
