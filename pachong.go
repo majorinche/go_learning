@@ -2,6 +2,8 @@ package main
 
 /***
 	20190709, bugfix, finish dedup
+	1, function is capture sensetive
+	2, result of function must define interface{}
 
 
 ***/
@@ -18,7 +20,7 @@ import (
 )
 
 func checkRegexp(file string, url string, style int) (result interface{}) {
-	index_num := strings.Index(url, "=") + 1
+	index_num := strings.Index(url, "=") + 1 // using url to do regular expression is not useurl, we mush extract info following equal signal
 	url_link := url[index_num:]
 	check_url := regexp.MustCompile(url_link)
 	switch style {
@@ -41,7 +43,7 @@ func fistStart() {
 
 	reg := regexp.MustCompile(`((ht|f)tps?)://[w]{0,3}.baidu.com/link\?[a-zA-z=0-9-\s]*`)
 
-	os.Truncate("/data/url.txt", 0)
+	os.Truncate("/data/url.txt", 0) //clear file first, cool method
 	url_file, _ := os.OpenFile("/data/url.txt", os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
 	defer url_file.Close()
 
