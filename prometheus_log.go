@@ -1,3 +1,6 @@
+/*
+	20190819 - 测试prometheus的日志功能
+*/
 package main
 
 import (

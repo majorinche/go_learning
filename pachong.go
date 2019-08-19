@@ -59,7 +59,6 @@ func fistStart() {
 	}
 	fmt.Print("\n首次收集网络地址：" + strconv.Itoa(len(reg.FindAllString(string(body), -1))) + "\n")
 	fmt.Print("\n去重后网络地址数：" + strconv.Itoa(num))
-	fmt.Print("\n\n首次储存成功！\n")
 }
 
 func main() {

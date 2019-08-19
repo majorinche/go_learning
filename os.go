@@ -1,3 +1,6 @@
+/*
+	20190819 - os主要作用就是调用系统命令
+*/
 package main
 
 import (
