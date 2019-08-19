@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	addrs, err := net.InterfaceAddrs()
+	addrs, err := net.InterfaceAddrs() //在windows环境也是有效的
 	if err != nil {
 		fmt.Errorf("error")
 	}
