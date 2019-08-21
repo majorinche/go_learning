@@ -22,7 +22,7 @@ func (aaa Triangle) ccc() { //给结构体Triangle定义函数ccc(),而aaa我们
 
 func main() {
 	test := Triangle{base: 3, height: 1}
-	fmt.Println(test.area())
-	aaa := Triangle{} //给结构体定义函数，可以不用自定义结构体的值
+	fmt.Println(test.area()) //可以理解为结构体的变量我们定义了两次，实际表述不是这样，主要利于理解
+	aaa := Triangle{}        //给结构体定义函数，可以不用自定义结构体的值
 	aaa.ccc()
 }
