@@ -1,4 +1,4 @@
-package connect_api
+package main
 
 import (
 	"fmt"
@@ -10,9 +10,10 @@ import (
 func main() {
 	// uses the current context in kubeconfig
 	// path-to-kubeconfig -- for example, /root/.kube/config
-	config, _ := clientcmd.BuildConfigFromFlags("", "/root/.kube/config")
+	config, _ := clientcmd.BuildConfigFromFlags("smbands@cluster.local", "/root/.kube/config")
 	// creates the clientset
 	clientset, _ := kubernetes.NewForConfig(config)
+	fmt.Printf(clientset)
 	// access the API to list pods
 	pods, _ := clientset.CoreV1().Pods("").List(v1.ListOptions{})
 	fmt.Printf("There are %d pods in the cluster\n", len(pods.Items))
