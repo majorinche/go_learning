@@ -42,8 +42,10 @@ endD:
 	for {
 		select {
 		case pool <- nil:
+			fmt.Println(len(pool)) //有意思，我们不一定知道通道里面是什么，但是至少知道，用了一次，就会减少一次，通道就是go版的kafka
 			go func() {
 				defer func() {
+					//		fmt.Println(len(pool))
 					<-pool
 				}()
 				resolver := &net.Resolver{}
