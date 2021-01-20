@@ -1,5 +1,6 @@
 /*
 	20190819 - 测试prometheus的日志功能
+	20210120 - go的依赖关系让我很头疼，不明显，我这里明明没有prometheus，居然运行时成功，log方法也正常调用
 */
 package main
 
